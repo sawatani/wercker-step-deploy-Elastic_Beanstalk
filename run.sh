@@ -5,4 +5,4 @@ sudo apt-get install python -y
 echo 'Installing the AWS EB CLI...'
 sudo pip install awsebcli
 
-ek --version
+eb --version
