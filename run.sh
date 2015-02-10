@@ -1,6 +1,6 @@
 echo 'Installing Python...'
 sudo apt-get update -y
-sudo apt-get install python -y
+sudo apt-get install python unzip -y
 
 echo 'Installing the AWS EB CLI...'
 sudo pip install awsebcli
@@ -12,7 +12,10 @@ sbt dist
 
 cd target/universal
 unzip *.zip
-cd $(find . -type d -maxdepth 1 -mindepth 1 | grep -v tmp)
+cd $(find . -maxdepth 1 -mindepth 1 -type d | grep -v tmp)
+
+rm -vf bin/*.bat
+exe_name=$(basename $(find bin/ -type f | head -n1))
 
 port=${PORT:-80}
 exe_options=${EXE_OPTIONS:--Dhttp.port=$port}
@@ -25,7 +28,7 @@ ADD . /usr/local/play
 ENV JAVA_OPTS $JAVA_OPTS
 
 EXPOSE $port
-CMD ["/usr/local/play/bin/tritonnote-server", "$exe_options"]
+CMD ["/usr/local/play/bin/$exe_name", "$exe_options"]
 EOF
 
 echo 'Prepared Dockerfile'
@@ -43,7 +46,7 @@ global:
 EOF
 
 mkdir -vp ~/.aws
-cat<<EOF > .aws/credentials
+cat<<EOF > ~/.aws/credentials
 [default]
 aws_access_key_id = $AWS_ACCESS_KEY_ID
 aws_secret_access_key = $AWS_SECRET_KEY
