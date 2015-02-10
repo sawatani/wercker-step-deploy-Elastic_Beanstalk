@@ -58,5 +58,5 @@ eb list -v
 eb status -v
 
 echo 'Deploy...'
-eb deploy -v
+eb deploy -v -m "Deploy from Wercker($WERCKER_DEPLOY_URL)"
 eb status -v
