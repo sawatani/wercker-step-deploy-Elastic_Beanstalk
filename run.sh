@@ -53,12 +53,6 @@ aws_access_key_id = $AWS_ACCESS_KEY_ID
 aws_secret_access_key = $AWS_SECRET_KEY
 EOF
 
-echo ".elasticbeanstalk/config.yml"
-cat .elasticbeanstalk/config.yml
-echo
-echo "~/.aws/credentials"
-cat ~/.aws/credentials
-
 eb list -v
 eb status -v
 
