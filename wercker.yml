@@ -2,8 +2,3 @@ box: wercker/default
 build:
     steps:
         - wercker/validate-wercker-step
-        - script:
-            name: test run
-            code: |-
-                chmod +x run.sh
-                ./run.sh
