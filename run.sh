@@ -43,6 +43,7 @@ branch-defaults:
 global:
   application_name: $WERCKER_PLAYFRAMEWORK_AWS_EB_APPLICATION_NAME
   default_region: $AWS_REGION
+  profile: default
 EOF
 
 mkdir -vp ~/.aws
@@ -62,5 +63,5 @@ eb list -v
 eb status -v
 
 echo 'Deploy...'
+[ -x bin/$exe_name ] || exit 1
 eb deploy -v
-
