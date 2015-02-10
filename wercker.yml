@@ -4,4 +4,6 @@ build:
         - wercker/validate-wercker-step
         - script:
             name: test run
-            code: ./run.sh
+            code: |-
+                chmod +x run.sh
+                ./run.sh
