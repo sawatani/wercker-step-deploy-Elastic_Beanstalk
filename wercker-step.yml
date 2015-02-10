@@ -1,26 +1,12 @@
-name: elastic_beanstalk
-version: 0.0.1-SNAPSHOT
-description: Deploy to AWS Elastic Beanstalk
+name: playframework-aws_eb
+version: 0.0.2-SNAPSHOT
+description: Deploy Playframework application to AWS Elastic Beanstalk
 kyewords:
   - deploy
   - aws
   - elastic beanstalk
+  - playframework
 properties:
-  access_key:
-    type: string
-    required: true
-  secret_key:
-    type: string
-    required: true
   application_name:
-    type: string
-    required: true
-  environment_name:
-    type: string
-    required: true
-  version_label:
-    type: string
-    required: true
-  retion:
     type: string
     required: true
