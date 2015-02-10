@@ -17,6 +17,7 @@ cd $(find . -maxdepth 1 -mindepth 1 -type d | grep -v tmp)
 rm -vf bin/*.bat
 exe_name=$(basename $(find bin/ -type f | head -n1))
 
+java_opts=${JAVA_OPTS:--Xmx512m}
 port=${PORT:-80}
 exe_options=${EXE_OPTIONS:--Dhttp.port=$port}
 
@@ -25,7 +26,7 @@ FROM java:8
 
 ADD . /usr/local/play
 
-ENV JAVA_OPTS $JAVA_OPTS
+ENV JAVA_OPTS $java_opts
 
 EXPOSE $port
 CMD ["/usr/local/play/bin/$exe_name", "$exe_options"]
@@ -57,5 +58,5 @@ eb list -v
 eb status -v
 
 echo 'Deploy...'
-[ -x bin/$exe_name ] || exit 1
 eb deploy -v
+eb status -v
