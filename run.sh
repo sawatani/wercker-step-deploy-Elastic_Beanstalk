@@ -52,6 +52,9 @@ aws_access_key_id = $AWS_ACCESS_KEY_ID
 aws_secret_access_key = $AWS_SECRET_KEY
 EOF
 
+eb list -v
+eb status -v
+
 echo 'Deploy...'
 eb deploy -v
 
