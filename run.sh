@@ -42,7 +42,7 @@ branch-defaults:
   default:
     environment: $ENVIRONMENT_NAME
 global:
-  application_name: $WERCKER_PLAYFRAMEWORK_AWS_EB_APPLICATION_NAME
+  application_name: $APPLICATION_NAME
   default_region: $AWS_REGION
   profile: default
 EOF

@@ -6,7 +6,3 @@ kyewords:
   - aws
   - elastic beanstalk
   - playframework
-properties:
-  application_name:
-    type: string
-    required: true
