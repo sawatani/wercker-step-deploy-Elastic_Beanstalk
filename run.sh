@@ -13,6 +13,7 @@ sbt dist
 cd target/universal
 unzip *.zip
 cd $(find . -maxdepth 1 -mindepth 1 -type d | grep -v tmp)
+rm -rf share/doc/
 
 rm -vf bin/*.bat
 exe_name=$(basename $(find bin/ -type f | head -n1))
@@ -58,5 +59,5 @@ eb list -v
 eb status -v
 
 echo 'Deploy...'
-eb deploy -v -m "Deploy from Wercker($WERCKER_DEPLOY_URL)"
+eb deploy -v -m "Deploy from Wercker: $WERCKER_DEPLOY_URL"
 eb status -v
