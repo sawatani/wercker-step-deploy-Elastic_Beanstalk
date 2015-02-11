@@ -17,11 +17,12 @@ cd $(find . -maxdepth 1 -mindepth 1 -type d | grep -v tmp)
 rm -vf bin/*.bat
 exe_name=$(basename $(find bin/ -type f | head -n1))
 
+java_version=${JAVA_VERSION:-8}
 java_opts=${JAVA_OPTS:--Xmx512m}
 port=${PORT:-80}
 
 cat<<EOF > Dockerfile
-FROM java:8
+FROM java:$java_version
 
 ADD . /usr/local/play
 
