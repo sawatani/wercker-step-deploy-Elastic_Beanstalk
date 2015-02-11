@@ -1,4 +1,26 @@
-# wercker-step-deploy-Elastic_Beanstalk
+# Playframework-aws_eb
 [![wercker status](https://app.wercker.com/status/f194882a1558f65c3cf8d493a813c78e/m "wercker status")](https://app.wercker.com/project/bykey/f194882a1558f65c3cf8d493a813c78e)
 
-Wercker Step for deploy Playframework application to AWS Elastic Beanstalk and making app to run on [Netty](http://netty.io) by using [Docker](http://docker.io)
+Wercker Step for deploy [Playframework](http://playframework.com) application to [AWS Elastic Beanstalk](http://aws.amazon.com/jp/elasticbeanstalk) and making app to run on [Netty](http://netty.io) by using [Docker](http://docker.io)
+
+# Requirement
+
+This step assumes that java and sbt is already installed*, and application is able be packaged by "sbt dist" command.
+It does not matter if application is build with playframework on previous build steps.
+
+# Usage
+
+This step does not take any arguments. Use environment variables for passing to step.
+
+## Environment Variables
+
+| Name | Required | Default Value / Example | Description |
+|---|:-:|---|---|
+| PORT | N | 80 | Port number which listen to |
+| JAVA_VERSION | N | 8 | Version tag for [Docker Java](https://registry.hub.docker.com/_/java/) |
+| JAVA_OPTS | N | -Xmx512 | pass to Netty launcher |
+| AWS_REGION | Y | us-east-1 | Region name which you want deploy |
+| APPLICATION_NAME | Y | TritonNote | Name of application in Elastic Beanstalk. |
+| ENVIRONMENT_NAME | Y | tritonnote-test | Environment name of application in Elastic Beanstalk.|
+| AWS_ACCESS_KEY_ID | Y | ASG9Q34QGA... | Credential to access Elastic Beanstalk |
+| AWS_SECRET_KEY | Y | aljLIUoq3t+3tk... | Credential to access Elastic Beanstalk |
