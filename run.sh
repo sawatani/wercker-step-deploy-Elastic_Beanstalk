@@ -17,19 +17,19 @@ cd $(find . -maxdepth 1 -mindepth 1 -type d | grep -v tmp)
 rm -vf bin/*.bat
 exe_name=$(basename $(find bin/ -type f | head -n1))
 
+java_version=${JAVA_VERSION:-8}
 java_opts=${JAVA_OPTS:--Xmx512m}
 port=${PORT:-80}
-exe_options=${EXE_OPTIONS:--Dhttp.port=$port}
 
 cat<<EOF > Dockerfile
-FROM java:8
+FROM java:$java_version
 
 ADD . /usr/local/play
 
 ENV JAVA_OPTS $java_opts
 
 EXPOSE $port
-CMD ["/usr/local/play/bin/$exe_name", "$exe_options"]
+CMD ["/usr/local/play/bin/$exe_name", "-Dhttp.port=$port"]
 EOF
 
 echo 'Prepared Dockerfile'
@@ -42,7 +42,7 @@ branch-defaults:
   default:
     environment: $ENVIRONMENT_NAME
 global:
-  application_name: $WERCKER_PLAYFRAMEWORK_AWS_EB_APPLICATION_NAME
+  application_name: $APPLICATION_NAME
   default_region: $AWS_REGION
   profile: default
 EOF

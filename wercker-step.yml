@@ -1,12 +1,8 @@
 name: playframework-aws_eb
-version: 0.1.1
+version: 0.2.0
 description: Deploy Playframework application to AWS Elastic Beanstalk
 kyewords:
   - deploy
   - aws
   - elastic beanstalk
   - playframework
-properties:
-  application_name:
-    type: string
-    required: true
