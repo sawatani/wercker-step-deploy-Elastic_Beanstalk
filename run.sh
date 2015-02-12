@@ -8,6 +8,7 @@ sudo pip install awsebcli
 eb --version
 
 echo 'Packaging...'
+java -version
 sbt dist
 
 cd target/universal
