@@ -19,11 +19,12 @@ rm -vf bin/*.bat
 exe_name=$(basename $(find bin/ -type f | head -n1))
 
 java_version=${JAVA_VERSION:-8}
+docker_base=${DOCKER_BASE:-java:$java_version}
 java_opts=${JAVA_OPTS:--Xmx512m}
 port=${PORT:-80}
 
 cat<<EOF > Dockerfile
-FROM java:$java_version
+FROM $docker_base
 
 ADD . /usr/local/play
 
