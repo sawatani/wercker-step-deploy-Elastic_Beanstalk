@@ -19,7 +19,7 @@ rm -rf share/doc/
 rm -vf bin/*.bat
 exe_name=$(basename $(find bin/ -type f | head -n1))
 
-java_version=${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_VERSION:-8}
+java_version=${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_VERSION:-7}
 java_opts=${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_OPTS:--Xmx512m}
 port=${WERCKER_PLAYFRAMEWORK_AWS_EB_PORT:-80}
 
