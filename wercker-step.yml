@@ -8,7 +8,7 @@ kyewords:
   - playframework
 properties:
   port:
-    type: Number
+    type: String
     required: false
   java_version:
     type: String
