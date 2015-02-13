@@ -8,7 +8,7 @@ kyewords:
   - playframework
 properties:
   port:
-    type: String
+    type: Integer
     required: false
   java_version:
     type: String
@@ -25,9 +25,9 @@ properties:
   environment-name:
     type: String
     required: true
-  - access-key:
+  access-key:
     type: String
     required: true
-  - secret-key:
+  secret-key:
     type: String
     required: true
