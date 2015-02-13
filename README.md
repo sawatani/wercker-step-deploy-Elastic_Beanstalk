@@ -10,17 +10,15 @@ It does not matter if application is build with playframework on previous build 
 
 # Usage
 
-This step does not take any arguments. Use environment variables for passing to step.
-
-## Environment Variables
+## Arguments
 
 | Name | Required | Default Value / Example | Description |
 |---|:-:|---|---|
-| PORT | N | 80 | Port number which listen to |
-| JAVA_VERSION | N | 8 | Version tag for [Docker Java](https://registry.hub.docker.com/_/java/) |
-| JAVA_OPTS | N | -Xmx512 | pass to Netty launcher |
-| AWS_REGION | Y | us-east-1 | Region name which you want deploy |
-| APPLICATION_NAME | Y | TritonNote | Name of application in Elastic Beanstalk. |
-| ENVIRONMENT_NAME | Y | tritonnote-test | Environment name of application in Elastic Beanstalk.|
-| AWS_ACCESS_KEY_ID | Y | ASG9Q34QGA... | Credential to access Elastic Beanstalk |
-| AWS_SECRET_KEY | Y | aljLIUoq3t+3tk... | Credential to access Elastic Beanstalk |
+| port | N | 80 | Port number which listen to |
+| java_version | N | 8 | Version tag for [Docker Java](https://registry.hub.docker.com/_/java/) |
+| java_opts | N | -Xmx512 | pass to Netty launcher |
+| region | Y | us-east-1 | Region name which you want deploy |
+| application-name | Y | TritonNote | Name of application in Elastic Beanstalk. |
+| environment-name | Y | tritonnote-test | Environment name of application in Elastic Beanstalk.|
+| acdess-key | Y | ASG9Q34QGA... | Credential to access Elastic Beanstalk |
+| secret-key | Y | aljLIUoq3t+3tk... | Credential to access Elastic Beanstalk |
