@@ -19,13 +19,12 @@ rm -rf share/doc/
 rm -vf bin/*.bat
 exe_name=$(basename $(find bin/ -type f | head -n1))
 
-java_version=${JAVA_VERSION:-8}
-docker_base=${DOCKER_BASE:-java:$java_version}
-java_opts=${JAVA_OPTS:--Xmx512m}
-port=${PORT:-80}
+java_version=${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_VERSION:-8}
+java_opts=${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_OPTS:--Xmx512m}
+port=${WERCKER_PLAYFRAMEWORK_AWS_EB_PORT:-80}
 
 cat<<EOF > Dockerfile
-FROM $docker_base
+FROM java:$java_version
 
 ADD . /usr/local/play
 
@@ -43,23 +42,23 @@ mkdir -vp .elasticbeanstalk
 cat<<EOF > .elasticbeanstalk/config.yml
 branch-defaults:
   default:
-    environment: $ENVIRONMENT_NAME
+    environment: $WERCKER_PLAYFRAMEWORK_AWS_EB_ENVIRONMENT_NAME
 global:
-  application_name: $APPLICATION_NAME
-  default_region: $AWS_REGION
+  application_name: $WERCKER_PLAYFRAMEWORK_AWS_EB_APPLICATION_NAME
+  default_region: $WERCKER_PLAYFRAMEWORK_AWS_EB_REGION
   profile: default
 EOF
 
 mkdir -vp ~/.aws
 cat<<EOF > ~/.aws/credentials
 [default]
-aws_access_key_id = $AWS_ACCESS_KEY_ID
-aws_secret_access_key = $AWS_SECRET_KEY
+aws_access_key_id = $WERCKER_PLAYFRAMEWORK_AWS_EB_ACCESS_KEY
+aws_secret_access_key = $WERCKER_PLAYFRAMEWORK_AWS_EB_SECRET_KEY
 EOF
 
 eb list -v
 eb status -v
 
 echo 'Deploy...'
-eb deploy -v -m "Deploy from Wercker: $WERCKER_DEPLOY_URL"
+eb deploy -v -m "Deployed by Wercker: $WERCKER_DEPLOY_URL"
 eb status -v

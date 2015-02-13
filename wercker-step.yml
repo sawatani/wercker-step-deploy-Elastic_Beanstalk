@@ -1,8 +1,33 @@
 name: playframework-aws_eb
-version: 0.2.3
+version: 0.2.4
 description: Deploy Playframework application to AWS Elastic Beanstalk
 kyewords:
   - deploy
   - aws
   - elastic beanstalk
   - playframework
+properties:
+  - port:
+    type: Integer
+    required: false
+  - java_version:
+    type: String
+    required: false
+  - java_opts:
+    type: String
+    required: false
+  - region:
+    type: String
+    required: true
+  - application-name:
+    type: String
+    required: true
+  - environment-name:
+    type: String
+    required: true
+  - access-key:
+    type: String
+    required: true
+  - secret-key:
+    type: String
+    required: true
