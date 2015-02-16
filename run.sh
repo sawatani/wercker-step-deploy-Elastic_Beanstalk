@@ -19,16 +19,14 @@ rm -rf share/doc/
 rm -vf bin/*.bat
 exe_name=$(basename $(find bin/ -type f | head -n1))
 
-java_version=${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_VERSION:-7}
-java_opts=${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_OPTS:--Xmx512m}
 port=${WERCKER_PLAYFRAMEWORK_AWS_EB_PORT:-80}
 
 cat<<EOF > Dockerfile
-FROM java:$java_version
+FROM java:${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_VERSION:-7}
 
 ADD . /usr/local/play
 
-ENV JAVA_OPTS $java_opts
+ENV JAVA_OPTS ${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_OPTS:--Xmx512m}
 
 EXPOSE $port
 CMD ["/usr/local/play/bin/$exe_name", "-Dhttp.port=$port"]
@@ -49,12 +47,8 @@ global:
   profile: default
 EOF
 
-mkdir -vp ~/.aws
-cat<<EOF > ~/.aws/credentials
-[default]
-aws_access_key_id = $WERCKER_PLAYFRAMEWORK_AWS_EB_ACCESS_KEY
-aws_secret_access_key = $WERCKER_PLAYFRAMEWORK_AWS_EB_SECRET_KEY
-EOF
+export AWS_ACCESS_KEY_ID="$WERCKER_PLAYFRAMEWORK_AWS_EB_ACCESS_KEY"
+export AWS_SECRET_ACCESS_KEY="$WERCKER_PLAYFRAMEWORK_AWS_EB_SECRET_KEY"
 
 eb list -v
 eb status -v
