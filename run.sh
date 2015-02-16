@@ -15,9 +15,8 @@ cd target/universal
 unzip *.zip
 cd $(find . -maxdepth 1 -mindepth 1 -type d | grep -v tmp)
 rm -rf share/doc/
-
 rm -vf bin/*.bat
-exe_name=$(basename $(find bin/ -type f | head -n1))
+mv -vf "$(basename $(find bin/ -type f | head -n1))" bin/run
 
 port=${WERCKER_PLAYFRAMEWORK_AWS_EB_PORT:-80}
 
@@ -29,7 +28,7 @@ ADD . /usr/local/play
 ENV JAVA_OPTS ${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_OPTS:--Xmx512m}
 
 EXPOSE $port
-CMD ["/usr/local/play/bin/$exe_name", "-Dhttp.port=$port"]
+CMD ["/usr/local/play/bin/run", "-Dhttp.port=$port"]
 EOF
 
 echo 'Prepared Dockerfile'
