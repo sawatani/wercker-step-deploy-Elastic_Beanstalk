@@ -43,7 +43,6 @@ branch-defaults:
 global:
   application_name: $WERCKER_PLAYFRAMEWORK_AWS_EB_APPLICATION_NAME
   default_region: $WERCKER_PLAYFRAMEWORK_AWS_EB_REGION
-  profile: default
 EOF
 
 export AWS_ACCESS_KEY_ID="$WERCKER_PLAYFRAMEWORK_AWS_EB_ACCESS_KEY"
