@@ -15,8 +15,8 @@ It does not matter if application is build with playframework on previous build 
 | Name | Required | Default Value / Example | Description |
 |---|:-:|---|---|
 | port | N | 80 | Port number which listen to |
-| java_version | N | 8 | Version tag for [Docker Java](https://registry.hub.docker.com/_/java/) |
 | java_opts | N | -Xmx512 | pass to Netty launcher |
+| java_version | Y | 8 | Version tag for [Docker Java](https://registry.hub.docker.com/_/java/) |
 | region | Y | us-east-1 | Region name which you want deploy |
 | application-name | Y | TritonNote | Name of application in Elastic Beanstalk. |
 | environment-name | Y | tritonnote-test | Environment name of application in Elastic Beanstalk.|

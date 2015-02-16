@@ -16,12 +16,12 @@ unzip *.zip
 cd $(find . -maxdepth 1 -mindepth 1 -type d | grep -v tmp)
 rm -rf share/doc/
 rm -vf bin/*.bat
-mv -vf "$(basename $(find bin/ -type f | head -n1))" bin/run
+mv -vf "$(find bin/ -type f | head -n1)" bin/run
 
 port=${WERCKER_PLAYFRAMEWORK_AWS_EB_PORT:-80}
 
 cat<<EOF > Dockerfile
-FROM java:${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_VERSION:-7}
+FROM java:$WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_VERSION
 
 ADD . /usr/local/play
 
