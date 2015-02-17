@@ -5,8 +5,7 @@ Wercker Step for deploy [Playframework](http://playframework.com) application to
 
 # Requirement
 
-This step assumes that java and sbt is already installed*, and application is able be packaged by "sbt dist" command.
-It does not matter if application is build with playframework on previous build steps.
+This step assumes that application is already be packaged by "sbt dist" command.
 
 # Usage
 
