@@ -7,10 +7,7 @@ sudo pip install awsebcli
 
 eb --version
 
-echo 'Packaging...'
-java -version
-sbt dist
-
+echo; echo 'Packaging...'
 cd target/universal
 unzip *.zip
 cd $(find . -maxdepth 1 -mindepth 1 -type d | grep -v tmp)
@@ -31,10 +28,10 @@ EXPOSE $port
 CMD ["/usr/local/play/bin/run", "-Dhttp.port=$port"]
 EOF
 
-echo 'Prepared Dockerfile'
+echo; echo 'Prepared Dockerfile'
 cat Dockerfile
 
-echo 'Preparing eb cli'
+echo; echo 'Preparing eb cli'
 mkdir -vp .elasticbeanstalk
 cat<<EOF > .elasticbeanstalk/config.yml
 branch-defaults:
@@ -51,6 +48,6 @@ export AWS_SECRET_ACCESS_KEY="$WERCKER_PLAYFRAMEWORK_AWS_EB_SECRET_KEY"
 eb list -v
 eb status -v
 
-echo 'Deploy...'
+echo; echo 'Deploy...'
 eb deploy -v -m "Deployed by Wercker: $WERCKER_DEPLOY_URL"
 eb status -v
