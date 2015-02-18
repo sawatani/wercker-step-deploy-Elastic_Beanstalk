@@ -1,31 +1,41 @@
-echo 'Installing Python...'
-sudo apt-get update -y
-sudo apt-get install python unzip -y
-
-echo 'Installing the AWS EB CLI...'
-sudo pip install awsebcli
-
+type eb || (\
+	echo 'Installing Python...' &&\
+	sudo apt-get update -y &&\
+	sudo apt-get install python-pip -y &&\
+	sudo pip install awsebcli \
+)
 eb --version
+
+type unzip || (\
+	echo 'Installing unzip...' &&\
+	sudo apt-get update -y &&\
+	sudo apt-get install unzip -y \
+)
 
 echo; echo 'Packaging...'
 cd target/universal
 unzip *.zip
 cd $(find . -maxdepth 1 -mindepth 1 -type d | grep -v tmp)
+
 rm -rf share/doc/
 rm -vf bin/*.bat
-mv -vf "$(find bin/ -type f | head -n1)" bin/run
+exec_name="$(basename $(find bin/ -type f | head -n1))"
+mv -vf bin/"$exec_name" bin/run
+
+name="$(basename $(pwd))"
+version="ver${name:${#exec_name}}-$(date -u +%y%m%d%H%M)"
 
 port=${WERCKER_PLAYFRAMEWORK_AWS_EB_PORT:-80}
 
 cat<<EOF > Dockerfile
 FROM java:$WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_VERSION
 
-ADD . /usr/local/play
+ADD . /play
 
 ENV JAVA_OPTS ${WERCKER_PLAYFRAMEWORK_AWS_EB_JAVA_OPTS:--Xmx512m}
 
 EXPOSE $port
-CMD ["/usr/local/play/bin/run", "-Dhttp.port=$port"]
+CMD ["/play/bin/run", "-Dhttp.port=$port"]
 EOF
 
 echo; echo 'Prepared Dockerfile'
@@ -49,5 +59,5 @@ eb list -v
 eb status -v
 
 echo; echo 'Deploy...'
-eb deploy -v -m "Deployed by Wercker: $WERCKER_DEPLOY_URL"
+eb deploy -v --label "$version" --message "Deployed by Wercker: $WERCKER_DEPLOY_URL"
 eb status -v
