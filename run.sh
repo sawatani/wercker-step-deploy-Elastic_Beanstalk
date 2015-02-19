@@ -23,7 +23,7 @@ exec_name="$(basename $(find bin/ -type f | head -n1))"
 mv -vf bin/"$exec_name" bin/run
 
 name="$(basename $(pwd))"
-version="ver${name:${#exec_name}}-$(date -u +%y%m%d%H%M)"
+version="${WERCKER_GIT_COMMIT:0:7}${name:${#exec_name}}"
 
 port=${WERCKER_PLAYFRAMEWORK_AWS_EB_PORT:-80}
 
