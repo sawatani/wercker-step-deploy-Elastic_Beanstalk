@@ -1,15 +1,15 @@
-type eb || (\
-	echo 'Installing Python...' &&\
-	sudo apt-get update -y &&\
-	sudo apt-get install python-pip -y &&\
-	sudo pip install awsebcli \
+type eb || (
+	echo 'Installing Python...'
+	sudo apt-get update -y
+	sudo apt-get install python-pip -y
+	sudo pip install awsebcli
 )
 eb --version
 
-type unzip || (\
-	echo 'Installing unzip...' &&\
-	sudo apt-get update -y &&\
-	sudo apt-get install unzip -y \
+type unzip || (
+	echo 'Installing unzip...'
+	sudo apt-get update -y
+	sudo apt-get install unzip -y
 )
 
 echo; echo 'Packaging...'
